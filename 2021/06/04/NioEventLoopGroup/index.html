@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, 浮生如梦">
+    <meta name="keywords" content="NioEventLoopGroup, 浮生如梦">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | 浮生如梦</title>
+    <title>NioEventLoopGroup | 浮生如梦</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -247,12 +247,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">NioEventLoopGroup</h1>
                 </div>
             </div>
         </div>
@@ -401,19 +401,26 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <p><img src="https://inus-markdown.oss-cn-beijing.aliyuncs.com/img/20201224112405121.png" alt="NioEventLoopGroup类继承关系"></p>
+<blockquote>
+<p><code>EventExecutorGroup</code> 主要职责是管理和治理所属的 <code>EventExecutor</code> , 通过 <code>next()</code> 获取下一个 <code>EventExecutor</code> 执行器执行提交的事件, 本质就是线程池</p>
+<p><code>AbstractEventExecutorGroup</code> 是 <code>EventExecutorGroup</code> 抽象实现类,  <code>next()</code> 和 <code>shutdown功能</code> 的方法没有实现</p>
+<p><code>MultithreadEventExecutorGroup</code> 是 <code>AbstractEventExecutorGroup</code> 继承类, 职责和 <code>EventExecutorGroup</code>, 内部定义了 <code>newChild</code> 创建被治理的 <code>EventExecutor</code> 的方法, 该事件执行组各个执行主要是 <code>EventExecutor</code></p>
+<p><code>MultithreadEventLoopGroup</code> 是 <code>MultithreadEventExecutorGroup</code> 继承类, 执行真正执行者是 <code>EventLoop</code> </p>
+<p><code>NioEventLoopGroup</code> 主要职责是 <code>EventLoop</code> 是治理, 定义创建被治理的 <code>EventLoop</code> 方法</p>
+</blockquote>
+<blockquote>
+<p><code>EventExecutorGroup</code> 本质就是线程池, 治理事件执行器, 包括事件执行器的创建, 关闭和分配事件执行</p>
+</blockquote>
+<p><img src="https://inus-markdown.oss-cn-beijing.aliyuncs.com/img/2020070416155161.png" alt="NioEventLoop继承关系图"></p>
+<blockquote>
+<p><code>NioEventLoop</code> 是事件真正的 <code>NioEvent</code> 执行者</p>
+</blockquote>
+<blockquote>
+<p><code>Netty</code>中每创建一个<code>Channel</code>都会连带创建一个<code>ChannelPipeline</code> 和 <code>Netty的Unsafe</code>, 主要是拦截<code>Nio</code>事件和处理<code>Channel</code>的<code>IO</code>数据</p>
+</blockquote>
+<p><code>NioServerSocketChannel</code> 内部都包含一个单独的多路复用器, 主要代码如下, </p>
+<p><img src="http://inus-markdown.oss-cn-beijing.aliyuncs.com/img/image-20210603113004202.png" alt="image-20210603113004202"></p>
 
                 
             </div>
@@ -440,7 +447,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangjinlibra.github.io/2021/06/04/hello-world/">https://zhangjinlibra.github.io/2021/06/04/hello-world/</a>
+                    <a href="https://zhangjinlibra.github.io/2021/06/04/NioEventLoopGroup/">https://zhangjinlibra.github.io/2021/06/04/NioEventLoopGroup/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -652,13 +659,13 @@
                 <i class="far fa-dot-circle"></i>&nbsp;本篇
             </div>
             <div class="card">
-                <a href="/2021/06/04/hello-world/">
+                <a href="/2021/06/04/NioEventLoopGroup/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="NioEventLoopGroup">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">NioEventLoopGroup</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -690,13 +697,13 @@
                 本篇&nbsp;<i class="far fa-dot-circle"></i>
             </div>
             <div class="card">
-                <a href="/2021/06/04/hello-world/">
+                <a href="/2021/06/04/NioEventLoopGroup/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="NioEventLoopGroup">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">NioEventLoopGroup</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
