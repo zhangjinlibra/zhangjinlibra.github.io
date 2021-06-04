@@ -18,8 +18,14 @@
     "title": "前去学习"
 }, {
     "avatar": "http://image.luokangyuan.com/4027734.jpeg",
-    "name": "hexo&matery",
+    "name": "hexo-theme-matery",
     "introduction": "站点建设跟我学",
     "url": "https://github.com/blinkfox/hexo-theme-matery/blob/develop/README_CN.md",
+    "title": "前去学习"
+}, {
+    "avatar": "http://image.luokangyuan.com/4027734.jpeg",
+    "name": "hexo",
+    "introduction": "hexo建设站点",
+    "url": "https://hexo.io/zh-cn/",
     "title": "前去学习"
 }]
