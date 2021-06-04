@@ -1,5 +1,7 @@
 ---
 title: NioEventLoopGroup
+categories: Netty
+tags: NioEventLoopGroup
 ---
 ![NioEventLoopGroup类继承关系](https://inus-markdown.oss-cn-beijing.aliyuncs.com/img/20201224112405121.png)
 
