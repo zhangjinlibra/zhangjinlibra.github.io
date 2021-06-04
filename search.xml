@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>NioEventLoopGroup</title>
+      <link href="2021/06/04/nioeventloopgroup/"/>
+      <url>2021/06/04/nioeventloopgroup/</url>
+      
+        <content type="html"><![CDATA[<p><img src="https://inus-markdown.oss-cn-beijing.aliyuncs.com/img/20201224112405121.png" alt="NioEventLoopGroup类继承关系"></p><blockquote><p><code>EventExecutorGroup</code> 主要职责是管理和治理所属的 <code>EventExecutor</code> , 通过 <code>next()</code> 获取下一个 <code>EventExecutor</code> 执行器执行提交的事件, 本质就是线程池</p><p><code>AbstractEventExecutorGroup</code> 是 <code>EventExecutorGroup</code> 抽象实现类,  <code>next()</code> 和 <code>shutdown功能</code> 的方法没有实现</p><p><code>MultithreadEventExecutorGroup</code> 是 <code>AbstractEventExecutorGroup</code> 继承类, 职责和 <code>EventExecutorGroup</code>, 内部定义了 <code>newChild</code> 创建被治理的 <code>EventExecutor</code> 的方法, 该事件执行组各个执行主要是 <code>EventExecutor</code></p><p><code>MultithreadEventLoopGroup</code> 是 <code>MultithreadEventExecutorGroup</code> 继承类, 执行真正执行者是 <code>EventLoop</code> </p><p><code>NioEventLoopGroup</code> 主要职责是 <code>EventLoop</code> 是治理, 定义创建被治理的 <code>EventLoop</code> 方法</p></blockquote><blockquote><p><code>EventExecutorGroup</code> 本质就是线程池, 治理事件执行器, 包括事件执行器的创建, 关闭和分配事件执行</p></blockquote><p><img src="https://inus-markdown.oss-cn-beijing.aliyuncs.com/img/2020070416155161.png" alt="NioEventLoop继承关系图"></p><blockquote><p><code>NioEventLoop</code> 是事件真正的 <code>NioEvent</code> 执行者</p></blockquote><blockquote><p><code>Netty</code>中每创建一个<code>Channel</code>都会连带创建一个<code>ChannelPipeline</code> 和 <code>Netty的Unsafe</code>, 主要是拦截<code>Nio</code>事件和处理<code>Channel</code>的<code>IO</code>数据</p></blockquote><p><code>NioServerSocketChannel</code> 内部都包含一个单独的多路复用器, 主要代码如下, </p><p><img src="http://inus-markdown.oss-cn-beijing.aliyuncs.com/img/image-20210603113004202.png" alt="image-20210603113004202"></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Netty </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> NioEventLoopGroup </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>
