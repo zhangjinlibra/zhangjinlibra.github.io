@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="es数据存取, 浮生如梦">
+    <meta name="keywords" content="springboot多数据源, 浮生如梦">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>es数据存取 | 浮生如梦</title>
+    <title>springboot多数据源 | 浮生如梦</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -249,12 +249,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">es数据存取</h1>
+                    <h1 class="description center-align post-title">springboot多数据源</h1>
                 </div>
             </div>
         </div>
@@ -370,8 +370,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/es%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96/">
-                                <span class="chip bg-color">es数据存取</span>
+                            <a href="/tags/springboot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+                                <span class="chip bg-color">springboot多数据源</span>
                             </a>
                         
                     </div>
@@ -382,8 +382,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/es/" class="post-category">
-                                es
+                            <a href="/categories/springboot/" class="post-category">
+                                springboot
                             </a>
                         
                     </div>
@@ -416,54 +416,13 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h4 id="ES写数据过程"><a href="#ES写数据过程" class="headerlink" title="ES写数据过程"></a>ES写数据过程</h4><ol>
-<li>客户端选择一个node发送请求过去, 这个节点称之为协调节点(coordinating node)</li>
-<li>协调节点对document进行路由, 将节点转发到主分片的节点上面</li>
-<li>有主分片的节点处理实际请求, 然后将数据同步副本节点</li>
-<li>协调节点如果发现主分片和所有副本节点都写完后响应客户端</li>
-</ol>
-<h4 id="ES读数据过程-根据doc-id进行查询"><a href="#ES读数据过程-根据doc-id进行查询" class="headerlink" title="ES读数据过程 - 根据doc id进行查询"></a>ES读数据过程 - 根据doc id进行查询</h4><blockquote>
-<p>可以通过 doc id 来查询，会根据 doc id 进行 hash，判断出来当时把 doc id 分配到了<br>哪个 shard 上面去，从那个 shard 去查询。</p>
-</blockquote>
-<ol>
-<li>客户端将请求发送任意一个node上面, 这个节点称之为协调节点</li>
-<li>协调节点会对文档的docid进行hash路由, 计算该文档存在所有的分片和副本之后, 然后再主分片和副本之间 <code>round-robin</code> 随机轮询算法, 选择一个节点处理该请求</li>
-<li>接收到请求的node, 返回document给协调节点</li>
-<li>协调节点将文档返回给客户端</li>
-</ol>
-<h4 id="ES检索流程"><a href="#ES检索流程" class="headerlink" title="ES检索流程"></a>ES检索流程</h4><blockquote>
-<p>ES根据检索的关键字, 将所有文档全部检索出来后返回给客户端</p>
-</blockquote>
-<ol>
-<li>客户端发送一个请求到协调节点</li>
-<li>协调节点将该请求发送到所有的分片对应的主分片和副本上去</li>
-<li><code>query phase</code> 阶段: 每个shared将自己检索的结果(其实就是一些doc id)返回协调节点, 由协调节点进行合并, 排序, 分页操作后, 产生最后的结果</li>
-<li><code>fetch phase</code> 阶段: 有协调节点去各个node上拉取document数据, 返回给客户端</li>
-</ol>
-<h4 id="ES-分片设置理论"><a href="#ES-分片设置理论" class="headerlink" title="ES 分片设置理论"></a>ES 分片设置理论</h4><ol>
-<li>每个分片的设置最大最好不好找过<code>30G</code></li>
-<li>先预见n年后的ES的整个数据体量</li>
-<li>如果: 每天数的数据增量是<code>100M</code> </li>
-<li>每年的增量就是<code>35G</code></li>
-<li>如果是设置<code>2个副本</code>, 则整体数据量大约是<code>100G</code></li>
-<li><code>3年</code>之后数据量是<code>300G</code>, 则分<code>10</code>个分片比较合适</li>
-<li>所有服务器的内存总和设置最少需要为<code>150G</code></li>
-<li>性能最佳为<code>300G</code>的文件内存</li>
-</ol>
-<h4 id="ES-关于分页"><a href="#ES-关于分页" class="headerlink" title="ES 关于分页"></a>ES 关于分页</h4><blockquote>
-<p>由于ES的分片, 数据分散在各个服务的node节点上面, 分页检索是比较慢的, 举个例子: </p>
-</blockquote>
-<ol>
-<li>协调节点接收到分页请求后, 假如是查询的是<code>第100页</code>, 每页的数据是 <code>10条</code></li>
-<li>各个分片会查询<code>前1000条</code>数据</li>
-<li>如果有5个分片那就是<code>5000条</code>数据</li>
-<li>接着协调节点会将所有的数据进行合并, 处理然后得到<code>第100页的10条数据</code></li>
-<li>所以结论是 <strong>es是分页越深速度越慢</strong> </li>
-</ol>
-<h5 id="ES-分页的一些解决方案"><a href="#ES-分页的一些解决方案" class="headerlink" title="ES 分页的一些解决方案"></a>ES 分页的一些解决方案</h5><ol>
-<li>不允许深度分页</li>
-<li>使用 <code>scroll api</code> 下拉将每页数据拉出来</li>
-</ol>
+                <h3 id="springboot-mybatis"><a href="#springboot-mybatis" class="headerlink" title="springboot + mybatis"></a>springboot + mybatis</h3><h4 id="maven依赖"><a href="#maven依赖" class="headerlink" title="maven依赖"></a>maven依赖</h4><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="yml配置文件"><a href="#yml配置文件" class="headerlink" title="yml配置文件"></a>yml配置文件</h4><figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据源</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">dudao:</span> <span class="comment"># duao数据源</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/dudao?useUnicode=true&amp;characterEncoding=utf8&amp;nullCatalogMeansCurrent=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">bpm:</span> <span class="comment"># bpm数据源</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/bpm?useUnicode=true&amp;characterEncoding=utf8&amp;nullCatalogMeansCurrent=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mybatis配置      </span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">classpath:mybatis/**/*.xml</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.lo.multipools.domain</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="springboot配置类"><a href="#springboot配置类" class="headerlink" title="springboot配置类"></a>springboot配置类</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">// 主数据源</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(basePackages = "com.lo.multipools.mapper.bpm", sqlSessionTemplateRef = "bpmSqlSessionTemplate")</span><br><span class="line">public class DataSourceBpm {</span><br><span class="line">	@Primary</span><br><span class="line">	@Bean("bpmDataSourceProperties")</span><br><span class="line">	@ConfigurationProperties(prefix = "spring.datasource.bpm")</span><br><span class="line">	public DataSourceProperties bpmDataSourceProperties() {</span><br><span class="line">		return new DataSourceProperties();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmDataSource")</span><br><span class="line">	public DataSource bpmDataSource(@Qualifier("bpmDataSourceProperties") DataSourceProperties dataSourceProperties) {</span><br><span class="line">		return dataSourceProperties.initializeDataSourceBuilder().build();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean("bpmSqlSessionFactory")</span><br><span class="line">	public SqlSessionFactory bpmSqlSessionFactory(@Qualifier("bpmDataSource") DataSource dataSource) throws Exception {</span><br><span class="line">		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">		sqlSessionFactory.setDataSource(dataSource);</span><br><span class="line">		sqlSessionFactory.setMapperLocations(</span><br><span class="line">		        // 配置mapper.xml路劲</span><br><span class="line">				new PathMatchingResourcePatternResolver().getResources("classpath*:/mybatis/bpm/**/*.xml"));</span><br><span class="line">		return sqlSessionFactory.getObject();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmTransactionManager")</span><br><span class="line">	public DataSourceTransactionManager bpmTransactionManager(@Qualifier("bpmDataSource") DataSource dataSource) {</span><br><span class="line">		return new DataSourceTransactionManager(dataSource);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmSqlSessionTemplate")</span><br><span class="line">	public SqlSessionTemplate bpmSqlSessionTemplate(</span><br><span class="line">			@Qualifier("bpmSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {</span><br><span class="line">		return new SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// dudao数据源</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(basePackages = "com.lo.multipools.mapper.dudao", sqlSessionTemplateRef = "dudaoSqlSessionTemplate")</span><br><span class="line">public class DataSourceDudao {</span><br><span class="line">	@Bean(name = "dudaoDataSourceProperties")</span><br><span class="line">	@ConfigurationProperties(prefix = "spring.datasource.dudao")</span><br><span class="line">	public DataSourceProperties dudaoDataSourceProperties() {</span><br><span class="line">		return new DataSourceProperties();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoDataSource")</span><br><span class="line">	public DataSource dudaoDataSource(</span><br><span class="line">			@Qualifier("dudaoDataSourceProperties") DataSourceProperties dataSourceProperties) {</span><br><span class="line">		return dataSourceProperties.initializeDataSourceBuilder().build();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean("dudaoSqlSessionFactory")</span><br><span class="line">	public SqlSessionFactory bpmSqlSessionFactory(@Qualifier("dudaoDataSource") DataSource dataSource)</span><br><span class="line">			throws Exception {</span><br><span class="line">		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">		sqlSessionFactory.setDataSource(dataSource);</span><br><span class="line">		sqlSessionFactory.setMapperLocations(</span><br><span class="line">		        // 配置mapper.xml路劲</span><br><span class="line">				new PathMatchingResourcePatternResolver().getResources("classpath*:/mybatis/dudao/**/*.xml"));</span><br><span class="line">		return sqlSessionFactory.getObject();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoTransactionManager")</span><br><span class="line">	public DataSourceTransactionManager bpmTransactionManager(@Qualifier("dudaoDataSource") DataSource dataSource) {</span><br><span class="line">		return new DataSourceTransactionManager(dataSource);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoSqlSessionTemplate")</span><br><span class="line">	public SqlSessionTemplate bpmSqlSessionTemplate(</span><br><span class="line">			@Qualifier("dudaoSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {</span><br><span class="line">		return new SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="mybatis-plus-多数据源"><a href="#mybatis-plus-多数据源" class="headerlink" title="mybatis-plus 多数据源"></a>mybatis-plus 多数据源</h3><p>@DS</p>
 
                 
             </div>
@@ -490,7 +449,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangjinlibra.github.io/2021/11/29/elasticsearch/">https://zhangjinlibra.github.io/2021/11/29/elasticsearch/</a>
+                    <a href="https://zhangjinlibra.github.io/2021/11/29/springboot-duo-shu-ju-yuan/">https://zhangjinlibra.github.io/2021/11/29/springboot-duo-shu-ju-yuan/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -528,8 +487,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/es%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96/">
-                                    <span class="chip bg-color">es数据存取</span>
+                                <a href="/tags/springboot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
+                                    <span class="chip bg-color">springboot多数据源</span>
                                 </a>
                             
                         </div>
@@ -701,9 +660,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/11/29/springboot-duo-shu-ju-yuan/">
                     <div class="card-image">
@@ -721,9 +681,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-29
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-29
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -736,6 +696,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -754,13 +715,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/06/09/netty-jie-ma-qi/">
+                <a href="/2021/11/29/elasticsearch/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="主要解码器">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="es数据存取">
                         
-                        <span class="card-title">主要解码器</span>
+                        <span class="card-title">es数据存取</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -771,14 +732,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-06-09
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-29
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Netty/" class="post-category">
-                                    Netty
+                            <a href="/categories/es/" class="post-category">
+                                    es
                                 </a>
                             
                             
@@ -788,8 +749,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Netty-Decoder/">
-                        <span class="chip bg-color">Netty Decoder</span>
+                    <a href="/tags/es%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96/">
+                        <span class="chip bg-color">es数据存取</span>
                     </a>
                     
                 </div>
