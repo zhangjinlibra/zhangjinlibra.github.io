@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="springboot多数据源, 浮生如梦">
+    <meta name="keywords" content="kubernetes存储, 浮生如梦">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>springboot多数据源 | 浮生如梦</title>
+    <title>kubernetes存储 | 浮生如梦</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -249,12 +249,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">springboot多数据源</h1>
+                    <h1 class="description center-align post-title">kubernetes存储</h1>
                 </div>
             </div>
         </div>
@@ -370,8 +370,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/springboot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
-                                <span class="chip bg-color">springboot多数据源</span>
+                            <a href="/tags/kubernetes/">
+                                <span class="chip bg-color">kubernetes</span>
                             </a>
                         
                     </div>
@@ -382,8 +382,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/springboot/" class="post-category">
-                                springboot
+                            <a href="/categories/kubernetes/" class="post-category">
+                                kubernetes
                             </a>
                         
                     </div>
@@ -395,7 +395,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-29
+                    2022-06-28
                 </div>
                 
 
@@ -416,13 +416,156 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h3 id="springboot-mybatis"><a href="#springboot-mybatis" class="headerlink" title="springboot + mybatis"></a>springboot + mybatis</h3><h4 id="maven依赖"><a href="#maven依赖" class="headerlink" title="maven依赖"></a>maven依赖</h4><figure class="highlight xml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-web<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.mybatis.spring.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mybatis-spring-boot-starter<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">version</span>&gt;</span>2.2.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">groupId</span>&gt;</span>mysql<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>mysql-connector-java<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">scope</span>&gt;</span>runtime<span class="tag">&lt;/<span class="name">scope</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></tbody></table></figure>
+                <h4 id="存储种类"><a href="#存储种类" class="headerlink" title="存储种类"></a>存储种类</h4><p><img src="http://inus-markdown.oss-cn-beijing.aliyuncs.com/img/image-20220615164455901.png" alt="存储种类"></p>
+<h5 id="1-临时存储"><a href="#1-临时存储" class="headerlink" title="1. 临时存储"></a>1. 临时存储</h5><p>充当临时空间使用，pod中产生的数据不需要做持久化存储时可使用该存储</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">kind: pod</span><br><span class="line">spec: </span><br><span class="line">  volumes:</span><br><span class="line">  - name: volumn-name #卷名称</span><br><span class="line">    emptyDir: {} #指定存储的方式为临时存储</span><br><span class="line">  containers:</span><br><span class="line">    volumeMounts:</span><br><span class="line">    - name: volumn-name # 和上面的对应</span><br><span class="line">      mountPath: /usr/share/nginx/html #挂载到容器中的路径</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="yml配置文件"><a href="#yml配置文件" class="headerlink" title="yml配置文件"></a>yml配置文件</h4><figure class="highlight yml"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据源</span></span><br><span class="line"><span class="attr">spring:</span></span><br><span class="line">  <span class="attr">datasource:</span></span><br><span class="line">    <span class="attr">dudao:</span> <span class="comment"># duao数据源</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/dudao?useUnicode=true&amp;characterEncoding=utf8&amp;nullCatalogMeansCurrent=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line">    <span class="attr">bpm:</span> <span class="comment"># bpm数据源</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">com.zaxxer.hikari.HikariDataSource</span></span><br><span class="line">      <span class="attr">driver-class-name:</span> <span class="string">com.mysql.cj.jdbc.Driver</span></span><br><span class="line">      <span class="attr">url:</span> <span class="string">jdbc:mysql://127.0.0.1:3306/bpm?useUnicode=true&amp;characterEncoding=utf8&amp;nullCatalogMeansCurrent=true</span></span><br><span class="line">      <span class="attr">username:</span> <span class="string">root</span></span><br><span class="line">      <span class="attr">password:</span> <span class="string">root</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># mybatis配置      </span></span><br><span class="line"><span class="attr">mybatis:</span></span><br><span class="line">  <span class="attr">mapper-locations:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="string">classpath:mybatis/**/*.xml</span></span><br><span class="line">  <span class="attr">type-aliases-package:</span> <span class="string">com.lo.multipools.domain</span></span><br><span class="line">  <span class="attr">configuration:</span></span><br><span class="line">    <span class="attr">map-underscore-to-camel-case:</span> <span class="literal">true</span></span><br></pre></td></tr></tbody></table></figure>
+<h5 id="2-半持久化存储"><a href="#2-半持久化存储" class="headerlink" title="2. 半持久化存储"></a>2. 半持久化存储</h5><p>hostpath，即与pod所运行的宿主机上面共享一个存数据的目录。<br>当pod漂移到其他node上面时将会读取不到原宿主机上面的内容.</p>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">kind: pod</span><br><span class="line">spec:</span><br><span class="line">  volumes:</span><br><span class="line">  - name: nginx-path</span><br><span class="line">    hostPath:</span><br><span class="line">      path: /opt/nginx/data #宿主机的目录</span><br><span class="line">      type: DirectoryOrCreate #给定的目录不存在则创建</span><br><span class="line">  containers:</span><br><span class="line">    volumeMounts:</span><br><span class="line">    - name: nginx-path # 和上面的对应</span><br><span class="line">      mountPath: /usr/share/nginx/html #挂载到容器中的路径</span><br></pre></td></tr></tbody></table></figure>
 
-<h4 id="springboot配置类"><a href="#springboot配置类" class="headerlink" title="springboot配置类"></a>springboot配置类</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><span class="line">// 主数据源</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(basePackages = "com.lo.multipools.mapper.bpm", sqlSessionTemplateRef = "bpmSqlSessionTemplate")</span><br><span class="line">public class DataSourceBpm {</span><br><span class="line">	@Primary</span><br><span class="line">	@Bean("bpmDataSourceProperties")</span><br><span class="line">	@ConfigurationProperties(prefix = "spring.datasource.bpm")</span><br><span class="line">	public DataSourceProperties bpmDataSourceProperties() {</span><br><span class="line">		return new DataSourceProperties();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmDataSource")</span><br><span class="line">	public DataSource bpmDataSource(@Qualifier("bpmDataSourceProperties") DataSourceProperties dataSourceProperties) {</span><br><span class="line">		return dataSourceProperties.initializeDataSourceBuilder().build();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean("bpmSqlSessionFactory")</span><br><span class="line">	public SqlSessionFactory bpmSqlSessionFactory(@Qualifier("bpmDataSource") DataSource dataSource) throws Exception {</span><br><span class="line">		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">		sqlSessionFactory.setDataSource(dataSource);</span><br><span class="line">		sqlSessionFactory.setMapperLocations(</span><br><span class="line">		        // 配置mapper.xml路劲</span><br><span class="line">				new PathMatchingResourcePatternResolver().getResources("classpath*:/mybatis/bpm/**/*.xml"));</span><br><span class="line">		return sqlSessionFactory.getObject();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmTransactionManager")</span><br><span class="line">	public DataSourceTransactionManager bpmTransactionManager(@Qualifier("bpmDataSource") DataSource dataSource) {</span><br><span class="line">		return new DataSourceTransactionManager(dataSource);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Primary</span><br><span class="line">	@Bean(name = "bpmSqlSessionTemplate")</span><br><span class="line">	public SqlSessionTemplate bpmSqlSessionTemplate(</span><br><span class="line">			@Qualifier("bpmSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {</span><br><span class="line">		return new SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">	}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// dudao数据源</span><br><span class="line">@Configuration</span><br><span class="line">@MapperScan(basePackages = "com.lo.multipools.mapper.dudao", sqlSessionTemplateRef = "dudaoSqlSessionTemplate")</span><br><span class="line">public class DataSourceDudao {</span><br><span class="line">	@Bean(name = "dudaoDataSourceProperties")</span><br><span class="line">	@ConfigurationProperties(prefix = "spring.datasource.dudao")</span><br><span class="line">	public DataSourceProperties dudaoDataSourceProperties() {</span><br><span class="line">		return new DataSourceProperties();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoDataSource")</span><br><span class="line">	public DataSource dudaoDataSource(</span><br><span class="line">			@Qualifier("dudaoDataSourceProperties") DataSourceProperties dataSourceProperties) {</span><br><span class="line">		return dataSourceProperties.initializeDataSourceBuilder().build();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean("dudaoSqlSessionFactory")</span><br><span class="line">	public SqlSessionFactory bpmSqlSessionFactory(@Qualifier("dudaoDataSource") DataSource dataSource)</span><br><span class="line">			throws Exception {</span><br><span class="line">		SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();</span><br><span class="line">		sqlSessionFactory.setDataSource(dataSource);</span><br><span class="line">		sqlSessionFactory.setMapperLocations(</span><br><span class="line">		        // 配置mapper.xml路劲</span><br><span class="line">				new PathMatchingResourcePatternResolver().getResources("classpath*:/mybatis/dudao/**/*.xml"));</span><br><span class="line">		return sqlSessionFactory.getObject();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoTransactionManager")</span><br><span class="line">	public DataSourceTransactionManager bpmTransactionManager(@Qualifier("dudaoDataSource") DataSource dataSource) {</span><br><span class="line">		return new DataSourceTransactionManager(dataSource);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	@Bean(name = "dudaoSqlSessionTemplate")</span><br><span class="line">	public SqlSessionTemplate bpmSqlSessionTemplate(</span><br><span class="line">			@Qualifier("dudaoSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {</span><br><span class="line">		return new SqlSessionTemplate(sqlSessionFactory);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
+<table>
+<thead>
+<tr>
+<th>hostPath.type</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DirectoryOrCreate</td>
+<td>给定的目录不存在则新建</td>
+</tr>
+<tr>
+<td>Directory</td>
+<td>给定的路径必须是一个存在的目录</td>
+</tr>
+<tr>
+<td>FileOrCreate</td>
+<td>给定的文件不存在则新建</td>
+</tr>
+<tr>
+<td>File</td>
+<td>给定的路径必须是一个存在的文件</td>
+</tr>
+<tr>
+<td>Socket</td>
+<td>给定的路径必须是一个存在的 UNXI socket</td>
+</tr>
+<tr>
+<td>CharDevice</td>
+<td>给定的路径必须是一个存在的字符设备</td>
+</tr>
+<tr>
+<td>BlockDevice</td>
+<td>给定的路径必须是一个存在的块设备</td>
+</tr>
+</tbody></table>
+<h5 id="3-持久化存储"><a href="#3-持久化存储" class="headerlink" title="3. 持久化存储"></a>3. 持久化存储</h5><p>PersistentVolumes k8s持久化卷，旨在集群之外存储数据。</p>
+<h4 id="PV-PersistentVolumes"><a href="#PV-PersistentVolumes" class="headerlink" title="PV PersistentVolumes"></a>PV PersistentVolumes</h4><blockquote>
+<p>k8s持久化存储的方案，pv是全局的资源，不和namespace绑定。</p>
+</blockquote>
+<p>k8s持久卷主要是什么卷的访问方式，容量，回收策略和卷的具体的实现的一些参数。</p>
+<h5 id="pv的几种访问模式"><a href="#pv的几种访问模式" class="headerlink" title="pv的几种访问模式"></a>pv的几种访问模式</h5><table>
+<thead>
+<tr>
+<th>模式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ReadWriteOnce</td>
+<td>只能被单节点读写，可以被同一个节点的多个pod读写</td>
+</tr>
+<tr>
+<td>ReadOnlyMany</td>
+<td>可被多个节点读</td>
+</tr>
+<tr>
+<td>ReadWriteMany</td>
+<td>可被多个节点读写</td>
+</tr>
+<tr>
+<td>ReadWriteOncePod</td>
+<td>只能被单个pod读写</td>
+</tr>
+</tbody></table>
+<h5 id="pv的回收策略"><a href="#pv的回收策略" class="headerlink" title="pv的回收策略"></a>pv的回收策略</h5><table>
+<thead>
+<tr>
+<th>策略</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Retain</td>
+<td>PV 数据保留，但会一直处于 Released 的状态， 不能被其他PVC使用，除非手动释放PV。</td>
+</tr>
+<tr>
+<td>Delete（默认）</td>
+<td>pvc删除后，关联的pv也将被删除</td>
+</tr>
+<tr>
+<td>Recycle（废弃）</td>
+<td>自动回收。执行（rm -rf /thevolume/*）</td>
+</tr>
+</tbody></table>
+<h5 id="pv的几种状态"><a href="#pv的几种状态" class="headerlink" title="pv的几种状态"></a>pv的几种状态</h5><table>
+<thead>
+<tr>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Available</td>
+<td>自由的资源，没有被绑定到pvc</td>
+</tr>
+<tr>
+<td>Bound</td>
+<td>pv被绑定到pvc</td>
+</tr>
+<tr>
+<td>Released</td>
+<td>pvc已经被释放了，但是pv还没有被释放</td>
+</tr>
+<tr>
+<td>Failed</td>
+<td>自动回收失败</td>
+</tr>
+</tbody></table>
+<h5 id="pv和pvc绑定的规则"><a href="#pv和pvc绑定的规则" class="headerlink" title="pv和pvc绑定的规则"></a>pv和pvc绑定的规则</h5><p>通过PVC定义的 ==accessModes== 读写权限，和 ==storage== 的定义，PVC会自动找到符合这些配置的PV进行绑定。</p>
+<p>**==一个PV被PVC绑定后，不能被别的PVC绑定==**。</p>
+<h4 id="静态创建pv"><a href="#静态创建pv" class="headerlink" title="静态创建pv"></a>静态创建pv</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolume</span><br><span class="line">metadata:</span><br><span class="line">  name: create-pv-test</span><br><span class="line">spec:</span><br><span class="line">  accessModes: ["ReadWriteMany","ReadWriteOnce"]</span><br><span class="line">  persistentVolumeReclaimPolicy: Retain</span><br><span class="line">  capacity: </span><br><span class="line">    storage: 1Gi</span><br><span class="line">  hostPath: </span><br><span class="line">    path: /opt/logs/create-pv-test</span><br></pre></td></tr></tbody></table></figure>
 
-<h3 id="mybatis-plus-多数据源"><a href="#mybatis-plus-多数据源" class="headerlink" title="mybatis-plus 多数据源"></a>mybatis-plus 多数据源</h3><p>@DS</p>
+<h4 id="动态创建pv（StorageClass）"><a href="#动态创建pv（StorageClass）" class="headerlink" title="动态创建pv（StorageClass）"></a>动态创建pv（StorageClass）</h4><p>Kubernetes提供了一套可以自动创建PV的机制，即Dynamic Volume Provisioning（动态PV）。而手动创建并管理的PV叫做Static Volume Provisioning（静态PV）。</p>
+<blockquote>
+<p>StorageClass描述了一类存储的参数，k8s根据这类参数动态创建PersistentVolumes。就类似于java的类，k8s根据类创建具体的pv实例。</p>
+</blockquote>
+<p>StorageClass对象会定义下面两部分内容:</p>
+<ol>
+<li>PV的属性。比如，存储类型，Volume的大小等。</li>
+<li>创建这种PV需要用到的存储插件，即存储制备器。</li>
+</ol>
+<p>有了这两个信息之后，Kubernetes就能够根据用户提交的PVC，找到一个对应的StorageClass，之后Kubernetes就会调用该StorageClass声明的存储插件，进而创建出需要的PV。</p>
+<h5 id="创建-StorageClass"><a href="#创建-StorageClass" class="headerlink" title="创建 StorageClass"></a>创建 StorageClass</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># sc是全局的资源，不需要namespace</span><br><span class="line">kind: StorageClass</span><br><span class="line">apiVersion: storage.k8s.io/v1</span><br><span class="line">metadata: </span><br><span class="line">  name: inus-sc-test</span><br><span class="line">allowVolumeExpansion: true #允许扩展卷，只能增加</span><br><span class="line">provisioner: driver.longhorn.io</span><br><span class="line">parameters:</span><br><span class="line">  numberOfReplicas: "3"</span><br><span class="line">  staleReplicaTimeout: "2880"</span><br><span class="line">  fromBackup: ""</span><br><span class="line">  fsType: "ext4"</span><br><span class="line">volumeBindingMode: Immediate</span><br><span class="line">reclaimPolicy: Retain</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="创建-pvc"><a href="#创建-pvc" class="headerlink" title="创建 pvc"></a>创建 pvc</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: inus-volv-test</span><br><span class="line">  namespace: 5g</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  storageClassName: inus-sc-test</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 2Gi</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="使用-StorageClass-创建-pod"><a href="#使用-StorageClass-创建-pod" class="headerlink" title="使用 StorageClass 创建 pod"></a>使用 StorageClass 创建 pod</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: volv-test</span><br><span class="line">  namespace: 5g</span><br><span class="line">  labels:</span><br><span class="line">    app: mysql-app</span><br><span class="line">spec:</span><br><span class="line">  restartPolicy: Always</span><br><span class="line">  containers:</span><br><span class="line">  - name: volv-test</span><br><span class="line">    image: mysql:latest</span><br><span class="line">    imagePullPolicy: IfNotPresent</span><br><span class="line">    volumeMounts:</span><br><span class="line">    - name: volv</span><br><span class="line">      mountPath: /var/lib/mysql</span><br><span class="line">    ports:</span><br><span class="line">    - containerPort: 3306</span><br><span class="line">    env:</span><br><span class="line">    - name: MYSQL_ROOT_PASSWORD</span><br><span class="line">      value: root</span><br><span class="line">  volumes:</span><br><span class="line">  - name: volv</span><br><span class="line">    persistentVolumeClaim:</span><br><span class="line">      claimName: inus-volv-test</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="创建-deployment"><a href="#创建-deployment" class="headerlink" title="创建 deployment"></a>创建 deployment</h5><blockquote>
+<p>deplyment部署的pod在pod删除后会主动拉起服务</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  namespace: 5g</span><br><span class="line">  name: mysql-deployment</span><br><span class="line">spec:</span><br><span class="line">  selector: </span><br><span class="line">    matchLabels: </span><br><span class="line">      app: mysql-app  # 选择的都是namespace中的labels</span><br><span class="line">  replicas: 1</span><br><span class="line">  minReadySeconds: 5</span><br><span class="line">  strategy: </span><br><span class="line">    type: Recreate</span><br><span class="line">  template: # 描述pod, 创建pod的模板</span><br><span class="line">    metadata:</span><br><span class="line">      name: mysql-app</span><br><span class="line">      namespace: 5g</span><br><span class="line">      labels:</span><br><span class="line">        app: mysql-app</span><br><span class="line">    spec:</span><br><span class="line">      containers:</span><br><span class="line">      - name: mysql-app</span><br><span class="line">        image: mysql:latest</span><br><span class="line">        imagePullPolicy: IfNotPresent</span><br><span class="line">        volumeMounts:</span><br><span class="line">        - name: volv</span><br><span class="line">          mountPath: /var/lib/mysql</span><br><span class="line">        ports:</span><br><span class="line">        - containerPort: 3306</span><br><span class="line">        env:</span><br><span class="line">        - name: MYSQL_ROOT_PASSWORD</span><br><span class="line">          value: root</span><br><span class="line">      volumes:</span><br><span class="line">      - name: volv</span><br><span class="line">        persistentVolumeClaim:</span><br><span class="line">          claimName: inus-volv-test</span><br></pre></td></tr></tbody></table></figure>
+
+<h5 id="创建service"><a href="#创建service" class="headerlink" title="创建service"></a>创建service</h5><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Service</span><br><span class="line">metadata:</span><br><span class="line">  name: mysql-service</span><br><span class="line">  namespace: 5g</span><br><span class="line">spec:</span><br><span class="line">  selector: </span><br><span class="line">    app: mysql-app</span><br><span class="line">  type: NodePort</span><br><span class="line">  ports:</span><br><span class="line">  - name: mysql-service-port</span><br><span class="line">    protocol: TCP</span><br><span class="line">    port: 3306</span><br><span class="line">    targetPort: 3306</span><br><span class="line">    nodePort: 33063</span><br></pre></td></tr></tbody></table></figure>
+
+<h3 id="nfs-的几种使用方式"><a href="#nfs-的几种使用方式" class="headerlink" title="nfs 的几种使用方式"></a>nfs 的几种使用方式</h3><h4 id="1-挂载到宿主机节点作为本地路径使用"><a href="#1-挂载到宿主机节点作为本地路径使用" class="headerlink" title="1. 挂载到宿主机节点作为本地路径使用"></a>1. 挂载到宿主机节点作为本地路径使用</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">volumes:</span><br><span class="line">- name: mysql-volv</span><br><span class="line">  hostPath: </span><br><span class="line">    path: /opt/nfsdata/mysql  # nfs服务器上的路径</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="2-pod-直接使用"><a href="#2-pod-直接使用" class="headerlink" title="2. pod 直接使用"></a>2. pod 直接使用</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: mysql-pod</span><br><span class="line">  labels:</span><br><span class="line">    app: mysql</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: mysql</span><br><span class="line">    image: mysql</span><br><span class="line">    env:</span><br><span class="line">    - name: MYSQL_ROOT_PASSWORD</span><br><span class="line">      value: root </span><br><span class="line">    volumeMounts:</span><br><span class="line">    - name: mysql-volv</span><br><span class="line">      mountPath: /var/lib/mysql</span><br><span class="line">  volumes:</span><br><span class="line">  - name: mysql-volv</span><br><span class="line">    nfs: </span><br><span class="line">      server: 192.168.1.142 # nfs服务器地址</span><br><span class="line">      path: /opt/nfsdata/mysql  # nfs服务器上的路径</span><br></pre></td></tr></tbody></table></figure>
+
+<h4 id="3-创建-StorageClass-使用"><a href="#3-创建-StorageClass-使用" class="headerlink" title="3. 创建 StorageClass 使用"></a>3. 创建 StorageClass 使用</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"># 创建 nfs provisioner</span><br><span class="line">apiVersion: apps/v1</span><br><span class="line">kind: Deployment</span><br><span class="line">metadata:</span><br><span class="line">  name: nfs-client-provisioner</span><br><span class="line">  labels:</span><br><span class="line">    app: nfs-client-provisioner</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  replicas: 1</span><br><span class="line">  strategy:</span><br><span class="line">    type: Recreate</span><br><span class="line">  selector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app: nfs-client-provisioner</span><br><span class="line">  template:</span><br><span class="line">    metadata:</span><br><span class="line">      labels:</span><br><span class="line">        app: nfs-client-provisioner</span><br><span class="line">    spec:</span><br><span class="line">      serviceAccountName: ns-root</span><br><span class="line">      containers:</span><br><span class="line">      - name: nfs-client-provisioner</span><br><span class="line">        image: registry.cn-beijing.aliyuncs.com/mydlq/nfs-subdir-external-provisioner:v4.0.0</span><br><span class="line">        volumeMounts:   # 挂载数据卷到容器指定目录</span><br><span class="line">        - name: nfs-volv</span><br><span class="line">          mountPath: /persistentvolumes # 不需要修改</span><br><span class="line">        env:</span><br><span class="line">        - name: PROVISIONER_NAME</span><br><span class="line">          value: nfs-provisioner    # 此处供应者名字供storageclass调用</span><br><span class="line">        - name: NFS_SERVER</span><br><span class="line">          value: 192.168.1.142  # 填入NFS的地址</span><br><span class="line">        - name: NFS_PATH</span><br><span class="line">          value: /opt/nfsdata/share # 填入NFS挂载的目录</span><br><span class="line">      volumes:</span><br><span class="line">      - name: nfs-volv</span><br><span class="line">        nfs:</span><br><span class="line">          server: 192.168.1.142 # 填入NFS的地址</span><br><span class="line">          path: /opt/nfsdata/share  # 填入NFS挂载的目录</span><br><span class="line"></span><br><span class="line"># 创建 StorageClass</span><br><span class="line">kind: StorageClass</span><br><span class="line">apiVersion: storage.k8s.io/v1</span><br><span class="line">metadata: </span><br><span class="line">  name: mysql-sc</span><br><span class="line">allowVolumeExpansion: true #允许扩展卷，只能增加</span><br><span class="line">provisioner:nfs-provisioner</span><br><span class="line">parameters:</span><br><span class="line">  numberOfReplicas: "3"</span><br><span class="line">  staleReplicaTimeout: "2880"</span><br><span class="line">  fromBackup: ""</span><br><span class="line">  fsType: "ext4"</span><br><span class="line">volumeBindingMode: Immediate</span><br><span class="line">reclaimPolicy: Retain</span><br><span class="line"></span><br><span class="line"># 申明 pvc</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: PersistentVolumeClaim</span><br><span class="line">metadata:</span><br><span class="line">  name: mysql-volv-pvc</span><br><span class="line">  namespace: default</span><br><span class="line">spec:</span><br><span class="line">  accessModes:</span><br><span class="line">    - ReadWriteMany</span><br><span class="line">  storageClassName: mysql-sc</span><br><span class="line">  resources:</span><br><span class="line">    requests:</span><br><span class="line">      storage: 2Gi</span><br><span class="line">      </span><br><span class="line"># 使用</span><br><span class="line">apiVersion: v1</span><br><span class="line">kind: Pod</span><br><span class="line">metadata:</span><br><span class="line">  name: mysql-pod</span><br><span class="line">  labels:</span><br><span class="line">    app: mysql</span><br><span class="line">spec:</span><br><span class="line">  containers:</span><br><span class="line">  - name: mysql</span><br><span class="line">    image: mysql</span><br><span class="line">    env:</span><br><span class="line">    - name: MYSQL_ROOT_PASSWORD</span><br><span class="line">      value: root </span><br><span class="line">    volumeMounts:</span><br><span class="line">    - name: mysql-volv</span><br><span class="line">      mountPath: /var/lib/mysql</span><br><span class="line">  volumes:</span><br><span class="line">  - name: mysql-volv</span><br><span class="line">    persistentVolumeClaim: </span><br><span class="line">      claimName: mysql-volv-pvc</span><br></pre></td></tr></tbody></table></figure>
+
+
 
                 
             </div>
@@ -449,7 +592,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangjinlibra.github.io/2021/11/29/springboot-duo-shu-ju-yuan/">https://zhangjinlibra.github.io/2021/11/29/springboot-duo-shu-ju-yuan/</a>
+                    <a href="https://zhangjinlibra.github.io/2022/06/28/k8s-cun-chu/">https://zhangjinlibra.github.io/2022/06/28/k8s-cun-chu/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -487,8 +630,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/springboot%E5%A4%9A%E6%95%B0%E6%8D%AE%E6%BA%90/">
-                                    <span class="chip bg-color">springboot多数据源</span>
+                                <a href="/tags/kubernetes/">
+                                    <span class="chip bg-color">kubernetes</span>
                                 </a>
                             
                         </div>
@@ -660,17 +803,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2022/06/28/k8s-an-zhuang-shou-ce/">
+                <a href="/2022/06/28/k8s-cun-chu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/3.jpg" class="responsive-img" alt="kubernetes安装手册">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="kubernetes存储">
                         
-                        <span class="card-title">kubernetes安装手册</span>
+                        <span class="card-title">kubernetes存储</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -680,9 +824,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -695,6 +839,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -713,13 +858,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/29/elasticsearch/">
+                <a href="/2022/06/28/k8s-fu-wu-bu-shu/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="es数据存取">
+                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="kubernetes服务部署">
                         
-                        <span class="card-title">es数据存取</span>
+                        <span class="card-title">kubernetes服务部署</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -730,14 +875,14 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/es/" class="post-category">
-                                    es
+                            <a href="/categories/kubernetes/" class="post-category">
+                                    kubernetes
                                 </a>
                             
                             
@@ -747,8 +892,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/es%E6%95%B0%E6%8D%AE%E5%AD%98%E5%8F%96/">
-                        <span class="chip bg-color">es数据存取</span>
+                    <a href="/tags/kubernetes/">
+                        <span class="chip bg-color">kubernetes</span>
                     </a>
                     
                 </div>
