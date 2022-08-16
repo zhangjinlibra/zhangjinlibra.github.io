@@ -31,6 +31,24 @@ EOF
 sudo sysctl --system
 ```
 
+> 关闭 selinux
+
+```
+# 临时关闭setenforce
+setenforce 0
+
+# 永久关闭 vi /etc/selinux/config
+SELINUX=disabled
+```
+
+> 设置主机名
+
+```
+vi /etc/hosts
+192.168.67.128 k8sm01
+192.168.67.129 k8sm02
+```
+
 #### 安装 k8s
 ==注意==：别安装最新版本的 `kubelet` `kubeadm` `kubectl`
 > `kubeadm config images pull --image-repository=registry.aliyuncs.com/google_containers` 这个命令可能拉取不到最新的k8s组件
@@ -73,10 +91,14 @@ kubeadm config images pull --image-repository=registry.aliyuncs.com/google_conta
 # docker login registry.aliyuncs.com
 # --control-plane-endpoint 配置control-plane-endpoint，如果是多个则配置代理地址，例如k8s高可用集群的VIP地址。
 # 192.168.1.188:6443 是 HA VIP 地址，该地址需要提前准备好
-kubeadm init --pod-network-cidr=10.244.0.0/16 \ 
-    --image-repository=registry.aliyuncs.com/google_containers \ 
-    --control-plane-endpoint=192.168.1.188:6443 \ 
-    --upload-certs
+# 1.23.6的版本向上发布svc时端口netstat查不到
+kubeadm init \
+  --pod-network-cidr=10.244.0.0/16 \
+  --service-cidr=10.96.0.0/12 \
+  --control-plane-endpoint=192.168.1.200:6443 \
+  --image-repository=registry.aliyuncs.com/google_containers \
+  --kubernetes-version v1.23.6 \
+  --upload-certs
     
 # 上面的指令安装成功后，执行下面的去污点指令
 # 允许master部署pod
@@ -113,6 +135,7 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 --token | 指定token
 --token-ttl | 指定token有效时间，如果设置为“0”，则永不过期
 --image-repository | 指定镜像仓库地址，默认为"k8s.gcr.io"
+--kubernetes-version | 指定k8s版本
 --dry-run | 输出将要执行的操作，不做任何改变，预运行命令，不会真正的初始化服务
 
 ##### k8s服务重启
@@ -120,6 +143,20 @@ kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Doc
 
 ```
 systemcl restart kubelet
+```
+
+#### 安装命令自动补全
+```
+# 安装 bash-completion
+yum install bash-completion
+
+# 在 bash 中设置当前 shell 的自动补全
+source <(kubectl completion bash) 
+source <(kubeadm completion bash) 
+
+# 在你的 bash shell 中永久地添加自动补全
+echo "source <(kubectl completion bash)" >> ~/.bashrc
+echo "source <(kubeadm completion bash)" >> ~/.bashrc
 ```
 
 #### 安装 dashboard
@@ -242,7 +279,14 @@ kubectl taint node etcd2 node-role.kubernetes.io/master:NoSchedule-
 kubectl taint node etcd2 node-role.kubernetes.io/master:NoSchedule [--overwrite]
 ```
 
-## 安装问题记录
+#### flannel 网络
+Kubernetes 集群中的每个主机都有自己一个完整的子网，不同节点上的Pod无法进行通信。
+
+![flannel](http://inus-markdown.oss-cn-beijing.aliyuncs.com/img/flannel.jpg)
+
+Pod 通过安装在每个节点上的 flannel-deamonset 进行跨节点通信。
+
+### 安装问题记录
 
 ```
 # 查询指定服务启动问题
@@ -250,20 +294,20 @@ journalctl -xefu kubelet
 tail -f /var/log/message
 ```
 
-####  failed to load Kubelet config file /var/lib/kubelet/config.yaml
+##### failed to load Kubelet config file /var/lib/kubelet/config.yaml
 ```
 # kubeadm init 没有执行
 kubeadm init --pod-network-cidr=10.244.0.0/16 --image-repository=registry.aliyuncs.com/google_containers
 ```
 
-#### hostname "mq" could not be reached
+##### hostname "mq" could not be reached
 ```
 # 将 mq 加入到 /etc/hosts
 vi /etc/hosts
 127.0.0.1 mq
 ```
 
-#### container runtime is not running: output: time="2022-05-05T11:17:59+08:00" level=fatal msg="getting status of runtime: rpc error: code = Unimplemented desc = unknown service runtime.v1alpha2.RuntimeService"
+##### container runtime is not running: output: time="2022-05-05T11:17:59+08:00" level=fatal msg="getting status of runtime: rpc error: code = Unimplemented desc = unknown service runtime.v1alpha2.RuntimeService"
 ```
 # 出现这个可能是版本问题，降低个版本
 # 下面的命令可以不执行
@@ -271,7 +315,7 @@ rm /etc/containerd/config.toml
 systemctl restart containerd
 ```
 
-#### kubelet cgroup driver: \"systemd\" is different from docker cgroup driver: \"cgroupfs\" 
+##### kubelet cgroup driver: \"systemd\" is different from docker cgroup driver: \"cgroupfs\" 
 [配置驱动](https://kubernetes.io/zh/docs/tasks/administer-cluster/kubeadm/configure-cgroup-driver/)
 ```
 # 查看 docker 驱动
@@ -292,7 +336,7 @@ systemctl daemon-reload
 systemctl restart docker
 ```
 
-#### [coredns 停滞在 Pending 状态](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#coredns-%E5%81%9C%E6%BB%9E%E5%9C%A8-pending-%E7%8A%B6%E6%80%81)
+##### [coredns 停滞在 Pending 状态](https://kubernetes.io/zh/docs/setup/production-environment/tools/kubeadm/troubleshooting-kubeadm/#coredns-%E5%81%9C%E6%BB%9E%E5%9C%A8-pending-%E7%8A%B6%E6%80%81)
 ![image-20220429144328392](http://inus-markdown.oss-cn-beijing.aliyuncs.com/img/image-20220429144328392.png)
 
 ```
@@ -304,7 +348,7 @@ tail -f /var/log/messages
 kubectl apply -f https://raw.githubusercontent.com/flannel-io/flannel/master/Documentation/kube-flannel.yml
 ```
 
-#### 第一次加入control plane的时候会有以下报错：集群没有稳定的controlPlaneEndpoint
+##### 第一次加入control plane的时候会有以下报错：集群没有稳定的controlPlaneEndpoint
 ```
 [root@etcd2 ~]# kubeadm join 192.168.1.142:6443 --token ocusf1.kd5vvk6t1sj3hvf7 --discovery-token-ca-cert-hash sha256:e35c83e987090c9157816ad1741151b97ec78a3e89d2b39f24425993bb4e2634 --control-plane --certificate-key 2b820018d17d8cbd7680f5c6fc42e05995cce859e48b98a10326cd758750abf3
 [preflight] Running pre-flight checks
@@ -334,7 +378,7 @@ kind: ClusterConfiguration
 kubernetesVersion: v1.18.0
 controlPlaneEndpoint: 192.168.1.142:6443
 ```
-#### "Error adding pod to network" err="failed to delegate add: failed to set bridge addr: \"cni0\" already has an IP address different from 10.244.1.1/24" pod="5g/user-pod-59549ff4c9-9cg67"
+##### "Error adding pod to network" err="failed to delegate add: failed to set bridge addr: \"cni0\" already has an IP address different from 10.244.1.1/24" pod="5g/user-pod-59549ff4c9-9cg67"
 
 > 节点加入了k8s集群多次，重新加入后没有重启docker，导致原有的网络和现在冲突
 
@@ -353,6 +397,14 @@ systemctl restart docker
 # 上述如果不行，下线docker网卡重新启动
 ifconfig docker0 down 
 ```
+
+##### connect: no route to host 
+```
+setenforce 0
+```
+
+
+
 
 
 
