@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="kubernetes 网络隔离, 浮生如梦">
+    <meta name="keywords" content="activiti7多实例加签和减签, 浮生如梦">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>kubernetes 网络隔离 | 浮生如梦</title>
+    <title>activiti7多实例加签和减签 | 浮生如梦</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -249,12 +249,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/20.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">kubernetes 网络隔离</h1>
+                    <h1 class="description center-align post-title">activiti7多实例加签和减签</h1>
                 </div>
             </div>
         </div>
@@ -370,8 +370,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/kubernetes-NetworkPolicy/">
-                                <span class="chip bg-color">kubernetes NetworkPolicy</span>
+                            <a href="/tags/%E5%8A%A0%E7%AD%BE%E5%87%8F%E7%AD%BE/">
+                                <span class="chip bg-color">加签减签</span>
                             </a>
                         
                     </div>
@@ -382,8 +382,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/kubernetes/" class="post-category">
-                                kubernetes
+                            <a href="/categories/activiti7/" class="post-category">
+                                activiti7
                             </a>
                         
                     </div>
@@ -395,7 +395,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2022-08-23
+                    2022-08-25
                 </div>
                 
 
@@ -417,21 +417,23 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <blockquote>
-<p>设置 POD 的网络访问策略，即 POD 的入网和出网策略。<br>NetworkPolicy 是 K8s 提供 POD 网络隔离能力的资源。（类似于设置网络防火墙规则）</p>
+<p>Activit7中没有加签的操作, 为了实现自定的加签和减签操作就需要程序猿自己来实现对应的命令<br>下面是多实例节点初始化的代码跟踪步骤</p>
 </blockquote>
-<p>POD 默认的允许所有的入网和出网流量的。如果要限制这一规则，则需要 NetworkPolicy 来指定规则。</p>
-<h4 id="示例分析"><a href="#示例分析" class="headerlink" title="示例分析"></a>示例分析</h4><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">apiVersion: networking.k8s.io/v1</span><br><span class="line">kind: NetworkPolicy</span><br><span class="line">metadata:</span><br><span class="line">  labels:</span><br><span class="line">    app.kubernetes.io/component: prometheus</span><br><span class="line">    app.kubernetes.io/instance: k8s</span><br><span class="line">    app.kubernetes.io/name: prometheus</span><br><span class="line">    app.kubernetes.io/part-of: kube-prometheus</span><br><span class="line">    app.kubernetes.io/version: 2.36.1</span><br><span class="line">  name: prometheus-k8s</span><br><span class="line">  namespace: monitoring</span><br><span class="line">spec:</span><br><span class="line">  egress:</span><br><span class="line">  - {}</span><br><span class="line">  ingress:</span><br><span class="line">  - from:</span><br><span class="line">    - podSelector:</span><br><span class="line">        matchLabels:</span><br><span class="line">          app.kubernetes.io/name: prometheus</span><br><span class="line">    ports:</span><br><span class="line">    - port: 9090</span><br><span class="line">      protocol: TCP</span><br><span class="line">    - port: 8080</span><br><span class="line">      protocol: TCP</span><br><span class="line">  - from:</span><br><span class="line">    - podSelector:</span><br><span class="line">        matchLabels:</span><br><span class="line">          app.kubernetes.io/name: grafana</span><br><span class="line">    ports:</span><br><span class="line">    - port: 9090</span><br><span class="line">      protocol: TCP</span><br><span class="line">  podSelector:</span><br><span class="line">    matchLabels:</span><br><span class="line">      app.kubernetes.io/component: prometheus</span><br><span class="line">      app.kubernetes.io/instance: k8s</span><br><span class="line">      app.kubernetes.io/name: prometheus</span><br><span class="line">      app.kubernetes.io/part-of: kube-prometheus</span><br><span class="line">  policyTypes:</span><br><span class="line">  - Egress</span><br><span class="line">  - Ingress</span><br></pre></td></tr></tbody></table></figure>
-<p>spec.podSelector 指定该 NetworkPolicy 资源涉及的 POD 的范围。在 NetworkPolicy 命名空间中的对应的labels的 POD 将会执行上诉配置。<br>spec.podSelector: {} 将会选择所有的 POD。</p>
-<p>ingress 配置 POD 的数据流入的规则。即入网白名单。<br>from 和 port 配置指定 POD 的入网端口。</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">spec:</span><br><span class="line">  ingress:</span><br><span class="line">    # 配置入网的pod</span><br><span class="line">  - from:</span><br><span class="line">    # 配置入网ip地址段</span><br><span class="line">    - ipBlock:</span><br><span class="line">        cidr: 172.17.0.0/16</span><br><span class="line">        # 排除指定的ip地址段</span><br><span class="line">        except:</span><br><span class="line">        - 172.17.1.0/24</span><br><span class="line">    # 配置命名空间下所有的 POD</span><br><span class="line">    - namespaceSelector:</span><br><span class="line">        matchLabels:</span><br><span class="line">          namespaceLables: namespaceValue</span><br><span class="line">    # 配置命名空间下指定的 POD</span><br><span class="line">    - podSelector:</span><br><span class="line">        matchLabels:</span><br><span class="line">          app.kubernetes.io/name: prometheus</span><br><span class="line">    # 指定pod的入网的端口号</span><br><span class="line">    ports:</span><br><span class="line">    - port: 9090</span><br><span class="line">      protocol: TCP</span><br><span class="line">    - port: 8080</span><br><span class="line">      protocol: TCP</span><br></pre></td></tr></tbody></table></figure>
+<h5 id="流程跟踪"><a href="#流程跟踪" class="headerlink" title="流程跟踪"></a>流程跟踪</h5><h6 id="大致流程"><a href="#大致流程" class="headerlink" title="大致流程"></a>大致流程</h6><ol>
+<li>完成当前任务节点, 如果节点行为是可触发的, 则触发节点离开能力<code>TriggerableActivityBehavior.trigger()</code></li>
+<li>获取当前任务节点的下一个连接线, 并设置为Execution的当前执行元素</li>
+<li>获取连接线的下一个节点元素, 并设置为Execution的当前执行元素</li>
+<li>执行当前元素的行为<code>ActivityBehavior.execute()</code></li>
+</ol>
+<h6 id="代码流程"><a href="#代码流程" class="headerlink" title="代码流程"></a>代码流程</h6><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line">// 1. CompleteTaskCmd.executeTaskComplete(), 触发任务节点完成行为</span><br><span class="line">Context.getAgenda().planTriggerExecutionOperation(executionEntity);</span><br><span class="line"></span><br><span class="line">// 2. TriggerExecutionOperation.run(), 真正触发代码</span><br><span class="line">((TriggerableActivityBehavior) activityBehavior).trigger(execution, null, null);</span><br><span class="line"></span><br><span class="line">// 3. 执行UserTaskActivityBehavior.trigger(DelegateExecution, String, Object)</span><br><span class="line">leave(execution);// 执行节点离开之后的操作</span><br><span class="line"></span><br><span class="line">// 4. 当前节点不是多实例, 执行上面的代码</span><br><span class="line">if (!hasLoopCharacteristics()) {</span><br><span class="line">  // 如果不是多实例执行</span><br><span class="line">  super.leave(execution);</span><br><span class="line">} else if (hasMultiInstanceCharacteristics()) {</span><br><span class="line">  // 节点包含多实例执行</span><br><span class="line">  multiInstanceActivityBehavior.leave(execution);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 5. 流程继续向下走, 执行节点流出操作</span><br><span class="line">bpmnActivityBehavior.performDefaultOutgoingBehavior((ExecutionEntity) execution);</span><br><span class="line"></span><br><span class="line">// 6. 取出下一个节点, 向下执行</span><br><span class="line">TakeOutgoingSequenceFlowsOperation.run()</span><br><span class="line">// 取出下个节点, 流程继续向下走</span><br><span class="line">execution.setCurrentFlowElement(sequenceFlow);</span><br><span class="line">execution.setActive(true);</span><br><span class="line">outgoingExecutions.add((ExecutionEntity) execution);</span><br><span class="line">Context.getAgenda().planContinueProcessOperation(outgoingExecution);</span><br><span class="line"></span><br><span class="line">// 7. 流程继续执行ContinueProcessOperation.run()</span><br><span class="line">// 取出当前节点</span><br><span class="line">FlowElement currentFlowElement = getCurrentFlowElement(execution);</span><br><span class="line">if (currentFlowElement instanceof FlowNode) {</span><br><span class="line">    continueThroughFlowNode((FlowNode) currentFlowElement);</span><br><span class="line">} else if (currentFlowElement instanceof SequenceFlow) {</span><br><span class="line">    // 当前节点是连接线, 走这个分支, </span><br><span class="line">    continueThroughSequenceFlow((SequenceFlow) currentFlowElement);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">protected void continueThroughSequenceFlow(SequenceFlow sequenceFlow) {</span><br><span class="line">// 取出下面节点</span><br><span class="line">FlowElement targetFlowElement = sequenceFlow.getTargetFlowElement();</span><br><span class="line">execution.setCurrentFlowElement(targetFlowElement);</span><br><span class="line">// 执行流程继续操作</span><br><span class="line">Context.getAgenda().planContinueProcessOperation(execution);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 8. ContinueProcessOperation.run(), 继续执行代码, 现在执行才是上一个节点完成后的下一个任务节点, 就是多实例节点</span><br><span class="line">if (currentFlowElement instanceof FlowNode) {</span><br><span class="line">    // UserTask执行该分支</span><br><span class="line">    continueThroughFlowNode((FlowNode) currentFlowElement);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 下面是continueThroughFlowNode()方法的代码片段</span><br><span class="line">if (flowNode instanceof Activity &amp;&amp; ((Activity) flowNode).hasMultiInstanceLoopCharacteristics()) {</span><br><span class="line">    // 初始化多实例节点</span><br><span class="line">    executeMultiInstanceSynchronous(flowNode);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">// 下面是executeMultiInstanceSynchronous()方法的代码片段</span><br><span class="line">// 获取多实例处理行为</span><br><span class="line">ActivityBehavior activityBehavior = (ActivityBehavior) flowNode.getBehavior();</span><br><span class="line">// 执行多实例节点能力</span><br><span class="line">executeActivityBehavior(activityBehavior,</span><br><span class="line">                            flowNode);</span><br><span class="line">// 调用子类的能力</span><br><span class="line">activityBehavior.execute(execution);</span><br><span class="line">                            </span><br><span class="line">// 9. ParallelMultiInstanceBehavior.execute()</span><br><span class="line">// 执行, 多实例节点的能力全部在这个类中</span><br><span class="line">MultiInstanceActivityBehavior.execute();</span><br><span class="line">// 创建会签多实例</span><br><span class="line">ParallelMultiInstanceBehavior.createInstances(execution);// // 创建子类执行流</span><br><span class="line">// ParallelGatewayActivityBehavior执行execute()方法</span><br><span class="line">ParallelMultiInstanceBehavior.createInstances()// 创建实例对象</span><br><span class="line">// 创建子执行流的具体的执行代码</span><br><span class="line">Context.getAgenda().planContinueMultiInstanceOperation((ExecutionEntity) execution);</span><br></pre></td></tr></tbody></table></figure>
 
-<p>egress 配置数据的出网规则</p>
-<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">spec:</span><br><span class="line">  # 配置哪些pod需要遵循该规则</span><br><span class="line">  egress:</span><br><span class="line">  - to:</span><br><span class="line">    # 配置pod的ip地址段</span><br><span class="line">    - ipBlock:</span><br><span class="line">        cidr: 10.0.0.0/24</span><br><span class="line">    # 配置pod的出网端口号</span><br><span class="line">    ports:</span><br><span class="line">    - protocol: TCP</span><br><span class="line">      port: 5978</span><br></pre></td></tr></tbody></table></figure>
+<h6 id="加签实现"><a href="#加签实现" class="headerlink" title="加签实现"></a>加签实现</h6><ol>
+<li>创建多实例执行流程</li>
+<li>初始化子执行流</li>
+</ol>
+<figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Execution execute(CommandContext commandContext) {</span><br><span class="line">	ExecutionEntityManager executionEntityManager = commandContext.getExecutionEntityManager();</span><br><span class="line"></span><br><span class="line">	// 根据执行实例ID获取当前执行实例</span><br><span class="line">	String executionId = task.getExecutionId();</span><br><span class="line">	ExecutionEntity currentExecutionEntity = executionEntityManager.findById(executionId);</span><br><span class="line"></span><br><span class="line">	// 获取当前执行实例的父实例, 父实例处实现加签操作</span><br><span class="line">	ExecutionEntity miExecution = currentExecutionEntity.getParent();</span><br><span class="line"></span><br><span class="line">	// 获取BpmnModel</span><br><span class="line">	String processDefinitionId = task.getProcessDefinitionId();</span><br><span class="line">	BpmnModel bpmnModel = ProcessDefinitionUtil.getBpmnModel(processDefinitionId);</span><br><span class="line"></span><br><span class="line">	// 获取当前Activity</span><br><span class="line">	String taskDefinitionKey = task.getTaskDefinitionKey();</span><br><span class="line">	Activity miActivityElement = (Activity) bpmnModel.getFlowElement(taskDefinitionKey);</span><br><span class="line"></span><br><span class="line">	// 判断当前执行实例的节点是否是多实例节点</span><br><span class="line">	MultiInstanceLoopCharacteristics multiInstanceLoopCharacteristics = miActivityElement.getLoopCharacteristics();</span><br><span class="line"></span><br><span class="line">	// 非多实例节点不能加签</span><br><span class="line">	if (multiInstanceLoopCharacteristics == null) {</span><br><span class="line">		throw new ActivitiException("No multi instance execution can not executed");</span><br><span class="line">	}</span><br><span class="line">	// 串行多实例不能加签</span><br><span class="line">	if (multiInstanceLoopCharacteristics.isSequential()) {</span><br><span class="line">		throw new ActivitiException("Sequential multi instance can not executed");</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	// 创建新的子实例</span><br><span class="line">	ExecutionEntity childExecution = executionEntityManager.createChildExecution(miExecution);</span><br><span class="line">	UserTask flowElement = (UserTask) miExecution.getCurrentFlowElement();</span><br><span class="line">	// flowElement.setAssignee(assignee); 并发问题, 需在下面的变量中设置</span><br><span class="line">	childExecution.setActive(true);</span><br><span class="line">	childExecution.setScope(false);</span><br><span class="line">	childExecution.setCurrentFlowElement(flowElement);</span><br><span class="line"></span><br><span class="line">	// 设置多实例流程变量</span><br><span class="line">	Integer nrOfInstances = (Integer) miExecution.getVariableLocal(EActiviti.NUMBER_OF_INSTANCES);</span><br><span class="line">	Integer nrOfActiveInstances = (Integer) miExecution.getVariableLocal(EActiviti.NUMBER_OF_ACTIVE_INSTANCES);</span><br><span class="line">	miExecution.setVariableLocal(EActiviti.NUMBER_OF_INSTANCES, nrOfInstances + 1);</span><br><span class="line">	miExecution.setVariableLocal(EActiviti.NUMBER_OF_ACTIVE_INSTANCES, nrOfActiveInstances + 1);</span><br><span class="line"></span><br><span class="line">	childExecution.setVariableLocal(EActiviti.LOOP_COUNTER, nrOfInstances);</span><br><span class="line">    childExecution.setVariableLocal(FlowUtil.MULTIINSTANCE_ELEMENT_VARIABLE, assignee);</span><br><span class="line">    commandContext.getAgenda().planContinueMultiInstanceOperation(childExecution);</span><br><span class="line">	return childExecution;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
 
-<p>policyTypes 配置 NetworkPloicy 规则生效的策略。入网、出网还是入网和出网。</p>
-<h4 id="NetworkPloicy-支持的网络插件"><a href="#NetworkPloicy-支持的网络插件" class="headerlink" title="NetworkPloicy 支持的网络插件"></a>NetworkPloicy 支持的网络插件</h4><p>要让网络策略生效，就需要特定的网络插件支持，目前已经实现了 NetworkPolicy 的网络插件包括 Calico、Weave 和 kube-router 等项目，但是并不包括 Flannel 项目。</p>
-<p>如果需要 Flannel 支持 NetworkPloicy 需要安装额外的 <a target="_blank" rel="noopener" href="https://projectcalico.docs.tigera.io/getting-started/kubernetes/flannel/flannel">插件</a></p>
-
+<h6 id="减签实现"><a href="#减签实现" class="headerlink" title="减签实现"></a>减签实现</h6><figure class="highlight plaintext"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">public Void execute(CommandContext commandContext) {</span><br><span class="line">	ExecutionEntityManager executionEntityManager = commandContext.getExecutionEntityManager();</span><br><span class="line"></span><br><span class="line">	// 根据执行实例ID获取当前执行实例</span><br><span class="line">	String executionId = task.getExecutionId();</span><br><span class="line">	ExecutionEntity currentExecutionEntity = executionEntityManager.findById(executionId);</span><br><span class="line"></span><br><span class="line">	// 获取当前执行实例的父实例, 父实例处实现加签操作</span><br><span class="line">	ExecutionEntity miExecution = currentExecutionEntity.getParent();</span><br><span class="line">	String processDefinitionId = task.getProcessDefinitionId();</span><br><span class="line">	BpmnModel bpmnModel = ProcessDefinitionUtil.getBpmnModel(processDefinitionId);</span><br><span class="line">	String taskDefinitionKey = task.getTaskDefinitionKey();</span><br><span class="line">	Activity miActivityElement = (Activity) bpmnModel.getFlowElement(taskDefinitionKey);</span><br><span class="line">	MultiInstanceLoopCharacteristics multiInstanceLoopCharacteristics = miActivityElement.getLoopCharacteristics();</span><br><span class="line"></span><br><span class="line">	if (miActivityElement.getLoopCharacteristics() == null) {</span><br><span class="line">		throw new ActivitiException("No multi instance execution found for execution id " + executionId);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	if (!(miActivityElement.getBehavior() instanceof MultiInstanceActivityBehavior)) {</span><br><span class="line">		throw new ActivitiException("No multi instance behavior found for execution id " + executionId);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	if (multiInstanceLoopCharacteristics.isSequential()) {</span><br><span class="line">		throw new ActivitiException("Sequential multi instance can not executed " + executionId);</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	// 删除执行流程</span><br><span class="line">	executionEntityManager.deleteChildExecutions(currentExecutionEntity, "Delete MI Execution", false);</span><br><span class="line">	executionEntityManager.deleteExecutionAndRelatedData(currentExecutionEntity, "Delete MI Execution", false);</span><br><span class="line"></span><br><span class="line">	Integer numberOfCompletedInstances = (Integer) miExecution.getVariable(EActiviti.NUMBER_OF_COMPLETED_INSTANCES);</span><br><span class="line">	miExecution.setVariableLocal(EActiviti.NUMBER_OF_COMPLETED_INSTANCES, numberOfCompletedInstances);</span><br><span class="line"></span><br><span class="line">	ParallelMultiInstanceBehavior prallelMultiInstanceBehavior = (ParallelMultiInstanceBehavior) miActivityElement</span><br><span class="line">			.getBehavior();</span><br><span class="line">	prallelMultiInstanceBehavior.leave(currentExecutionEntity);</span><br><span class="line"></span><br><span class="line">	return null;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
                 
             </div>
             <hr/>
@@ -457,7 +459,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://zhangjinlibra.github.io/2022/08/23/k8s-networkpolicy/">https://zhangjinlibra.github.io/2022/08/23/k8s-networkpolicy/</a>
+                    <a href="https://zhangjinlibra.github.io/2022/08/25/activiti7-duo-shi-li-jia-qian-he-jian-qian/">https://zhangjinlibra.github.io/2022/08/25/activiti7-duo-shi-li-jia-qian-he-jian-qian/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -495,8 +497,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/kubernetes-NetworkPolicy/">
-                                    <span class="chip bg-color">kubernetes NetworkPolicy</span>
+                                <a href="/tags/%E5%8A%A0%E7%AD%BE%E5%87%8F%E7%AD%BE/">
+                                    <span class="chip bg-color">加签减签</span>
                                 </a>
                             
                         </div>
@@ -672,13 +674,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2022/08/25/activiti7-duo-shi-li-jia-qian-he-jian-qian/">
+                <a href="/2022/08/25/activiti7-ren-wu-hui-tui/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="activiti7多实例加签和减签">
+                        <img src="/medias/featureimages/8.jpg" class="responsive-img" alt="activiti7任务回退">
                         
-                        <span class="card-title">activiti7多实例加签和减签</span>
+                        <span class="card-title">activiti7任务回退</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -706,8 +708,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/%E5%8A%A0%E7%AD%BE%E5%87%8F%E7%AD%BE/">
-                        <span class="chip bg-color">加签减签</span>
+                    <a href="/tags/%E4%BB%BB%E5%8A%A1%E5%9B%9E%E9%80%80/">
+                        <span class="chip bg-color">任务回退</span>
                     </a>
                     
                 </div>
@@ -721,13 +723,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2022/06/28/k8s-cun-chu/">
+                <a href="/2022/08/23/k8s-networkpolicy/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="kubernetes存储">
+                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="kubernetes 网络隔离">
                         
-                        <span class="card-title">kubernetes存储</span>
+                        <span class="card-title">kubernetes 网络隔离</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -738,7 +740,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2022-06-28
+                                <i class="far fa-clock fa-fw icon-date"></i>2022-08-23
                             </span>
                         <span class="publish-author">
                             
@@ -755,8 +757,8 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/kubernetes/">
-                        <span class="chip bg-color">kubernetes</span>
+                    <a href="/tags/kubernetes-NetworkPolicy/">
+                        <span class="chip bg-color">kubernetes NetworkPolicy</span>
                     </a>
                     
                 </div>
